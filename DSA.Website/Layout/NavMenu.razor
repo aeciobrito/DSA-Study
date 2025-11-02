@@ -1,0 +1,54 @@
+﻿<div class="top-row ps-3 navbar navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="">DSA Visualizer</a>
+        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</div>
+
+<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
+    <nav class="flex-column">
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <h6 class="nav-section-title">Algoritmos</h6>
+            <NavLink class="nav-link" href="algorithms/bubble-sort">
+                <span class="bi bi-bar-chart-steps-nav-menu" aria-hidden="true"></span> Bubble Sort
+            </NavLink>
+            <NavLink class="nav-link" href="algorithms/selection-sort">
+                <span class="bi bi-bar-chart-steps-nav-menu" aria-hidden="true"></span> Selection Sort
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <h6 class="nav-section-title">Estruturas (Linear)</h6>
+            @* <NavLink class="nav-link" href="datastructures/stack">
+                <span class="bi bi-stack-nav-menu" aria-hidden="true"></span> Stack
+            </NavLink>
+            *@
+        </div>
+
+    </nav>
+</div>
+
+<style>
+    .nav-section-title {
+        color: #888;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+        padding-left: 0.8rem;
+    }
+</style>
+
+@code {
+    private bool collapseNavMenu = true;
+    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+    private void ToggleNavMenu() => collapseNavMenu = !collapseNavMenu;
+}
