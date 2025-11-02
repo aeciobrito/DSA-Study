@@ -32,6 +32,9 @@ jobs:
         with:
           html_path: release/wwwroot/index.html
           base_href: /DSA-Study/
+
+      - name: List files in release/wwwroot
+        run: ls -R release/wwwroot
       
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
