@@ -25,22 +25,17 @@ jobs:
         run: dotnet build --configuration Release --no-restore
 
       - name: Publish
-        run: dotnet publish DSA.Website/DSA.Website.csproj --configuration Release --output release --no-build
+        run: dotnet publish DSA.Website/DSA.Website.csproj --configuration Release --output ./ --no-build
 
       - name: Rewrite base href
         uses: SteveSandersonMS/ghaction-rewrite-base-href@v1
         with:
-          html_path: release/wwwroot/index.html
+          html_path: wwwroot/index.html
           base_href: /DSA-Study/
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: release/wwwroot
-
-      - name: List files in gh-pages branch
-        run: |
-          git fetch origin gh-pages
-          git checkout gh-pages
-          ls -R
+          publish_dir: ./
+          cname: ''
