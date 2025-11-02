@@ -8,6 +8,9 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     
+    permissions:
+      contents: write 
+    
     steps:
     - name: Checkout
       uses: actions/checkout@v4
@@ -15,7 +18,7 @@ jobs:
     - name: Setup .NET 8
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '8.0.x' # Garante que está usando .NET 8
+        dotnet-version: '8.0.x' 
 
     - name: Publish .NET Project
       run: |
