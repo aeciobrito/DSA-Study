@@ -1,0 +1,49 @@
+﻿@page "/algorithms/selection-sort"
+@using DSA.Shared.Algorithms.Sorting
+@using DSA.Shared.Interfaces
+@using System
+@using DSA.Shared.Utils
+
+<PageTitle>Selection Sort</PageTitle>
+<h1>Visualizador de Selection Sort</h1>
+
+<div class="console-window text-center my-3" tabindex="0">
+    <div class="d-inline-block bg-dark text-light border p-2 text-start shadow padding-0">
+        <pre class="console">
+        <code>@Console.CurrentState</code>
+        </pre>
+    </div>
+</div>
+
+<button class="btn btn-primary" @onclick="StartAlgorithm" disabled="@isRunning">
+    @(isRunning ? "Executando..." : "Iniciar / Reiniciar")
+</button>
+
+@code {
+    private BlazorConsole Console = new();
+    private bool isRunning = false;
+
+    protected override void OnInitialized()
+    {
+        Console.TriggerRefresh = StateHasChanged;
+    }
+
+    private async Task StartAlgorithm()
+    {
+        if (isRunning) return;
+        isRunning = true;
+        
+        IVisualizerConsole visualizer = Console; 
+
+        int[] array = ArrayGenerator.Generate();
+
+        SelectionSort sorter = new SelectionSort(visualizer); 
+        
+        await sorter.Run(array);
+        
+        await visualizer.WriteLine("\nOrdenação Concluída!");
+        await visualizer.Sleep(0); 
+
+        isRunning = false;
+    }
+}

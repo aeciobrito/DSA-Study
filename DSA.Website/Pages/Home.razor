@@ -1,0 +1,50 @@
+﻿@page "/"
+
+<PageTitle>Home - Visualizador de DSA</PageTitle>
+
+<h1>Bem-vindo ao Visualizador de DSA</h1>
+
+<p>Este é um projeto de estudo focado em visualizar Estruturas de Dados e Algoritmos (DSA) em ação. O objetivo é entender visualmente como diferentes algoritmos operam, tanto em um aplicativo de console quanto aqui na web.</p>
+
+<hr />
+
+<h2>O Conceito: Escreva Uma Vez, Rode em Dois Lugares</h2>
+
+<p>A arquitetura deste projeto foi desenhada para **separar totalmente a lógica do algoritmo da sua renderização**. Isso significa que o código do <code>BubbleSort.cs</code>, por exemplo, não sabe se está desenhando em um terminal ou em uma página web.</p>
+
+<p>Isso é alcançado através de uma interface central:</p>
+
+
+
+<ol>
+    <li><strong>DSA.Shared:</strong> O "cérebro" do projeto. Contém toda a lógica dos algoritmos (ex: <code>BubbleSort</code>, <code>SelectionSort</code>) e a interface <code>IVisualizerConsole</code>. A lógica do algoritmo é agnóstica e apenas envia comandos para esta interface (ex: <code>DrawState</code>, <code>Clear</code>, <code>SetColor</code>).</li>
+    <br />
+    <li><strong>DSA.Console:</strong> Um "renderizador" de terminal. Ele possui a classe <code>SystemVisualizerConsole</code>, que implementa <code>IVisualizerConsole</code> traduzindo os comandos para <code>System.Console</code> (desenhando barras ASCII <code>█</code>).</li>
+    <br />
+    <li><strong>DSA.Website:</strong> O "renderizador" web (o que você está vendo). Ele possui a classe <code>BlazorConsole</code>, que implementa a *mesma* interface traduzindo os comandos para HTML (<code>&lt;span&gt;</code>, <code>&lt;br /&gt;</code>).</li>
+</ol>
+
+<p>O resultado é que o <strong>exato mesmo código</strong> de algoritmo do <code>DSA.Shared</code> roda nos dois ambientes sem nenhuma modificação.</p>
+
+<hr />
+
+<h2>Como Navegar no Site</h2>
+
+<p>Use o <strong>menu de navegação</strong> à esquerda para explorar os diferentes algoritmos.</p>
+
+<ul>
+    <li>Cada página (ex: Bubble Sort) permite que você execute uma visualização.</li>
+    <li>Ao clicar em <strong>"Iniciar / Reiniciar"</strong>, um novo array aleatório é criado automaticamente pelo <code>ArrayGenerator</code>.</li>
+    <li>Baseado na sua última modificação, o gerador sempre cria um array com <strong>tamanho entre 5 e 15 elementos</strong> e valores no intervalo de <strong>-10 a 10</strong>.</li>
+    <li>A classe <code>BlazorConsole</code> então renderiza a animação passo a passo, mostrando os eixos positivo e negativo das barras.</li>
+</ul>
+
+<h2>A Versão de Console</h2>
+
+<p>Para executar a versão de terminal, navegue até a pasta da solução no seu computador e rode o seguinte comando:</p>
+
+<pre class="console">
+    <code>dotnet run --project DSA.Console</code>
+</pre>
+
+<p>Você verá um menu que permite executar os mesmos algoritmos, com a mesma lógica de visualização, renderizados diretamente no seu terminal.</p>
