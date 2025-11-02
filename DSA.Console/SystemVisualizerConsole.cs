@@ -32,7 +32,7 @@ namespace DSA.Console
 
         public Task Sleep(int milliseconds)
         {
-            System.Threading.Thread.Sleep(milliseconds);
+            Thread.Sleep(milliseconds);
             return Task.CompletedTask;
         }
 
@@ -86,6 +86,7 @@ namespace DSA.Console
                         System.Console.Write("   ");
                     }
                 }
+                await ResetColor();
                 await WriteLine();
             }
         }
