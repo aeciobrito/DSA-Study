@@ -22,8 +22,9 @@ jobs:
 
     - name: Publish .NET Project
       run: |
-        dotnet publish DSA.Website -c Release -p:BasePath=/DSA-Study/ -o ./publish
-        
+        dotnet publish DSA.Website -c Release -p:AppBase=/DSA-Study/ -o ./publish        
+        cp ./publish/wwwroot/index.html ./publish/wwwroot/404.html
+
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
