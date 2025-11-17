@@ -22,7 +22,7 @@ using System.Linq;
 class Solution
 {
 
-    private static Dictionary<string, HashSet<string>> cache = new();
+    private static Dictionary<string, HashSet<string>> cache = new(); // my solution
 
     static void Main(string[] args)
     {
@@ -49,6 +49,8 @@ class Solution
     }
 
     public static void updateCache(String clientId, String offerId) {
+
+        #region MySolution
         //TODO update this method to include logic to update cache 
         if(!cache.ContainsKey(clientId))
         {
@@ -56,11 +58,13 @@ class Solution
         }
 
         cache[clientId].Add(offerId);
+        #region EndRegion
     }
   
     public static Boolean cacheContains(String clientId, String offerId) {
         //TODO update this method to include logic to verify if a certain record is in the cache
 
+        #region MySolution
         if (cache.TryGetValue(clientId, out HashSet<string> offers))
         {
             var response = offers.Contains(offerId);
@@ -69,5 +73,6 @@ class Solution
         }
 
         return false;
+        #region EndRegion
     }
 }
